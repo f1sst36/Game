@@ -1,6 +1,6 @@
 import { Game } from './common/Game';
 import { Light } from './light/Light';
-import { Cube } from './objects/Cube';
+import { Cube } from './entities/Cube';
 import { StopRenderer } from './utils/StopRenderer';
 
 window.game = new Game();
