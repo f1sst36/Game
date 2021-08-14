@@ -16,7 +16,7 @@ export class Game {
 
         this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
         this.camera.position.x = 0;
-        this.camera.position.y = 1;
+        this.camera.position.y = 4;
         this.camera.position.z = 0;
 
         // this.camera.position.set(0, 1, 0);

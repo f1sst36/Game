@@ -37,9 +37,7 @@ export class Ground extends Entity {
     }
 
     protected update = () => {
-        console.log(this.self.rotation.x)
-        // this.self.rotation.x = time / 2000;
-        // this.self.rotation.y = time / 1000;
+        //
     }
 }
 
