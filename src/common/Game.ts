@@ -17,7 +17,7 @@ export class Game {
 
         this.scene = new Scene();
 
-        console.log('zxccvnbmbnm')
+        console.log('123123123123123')
 
         this.renderer = new WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
