@@ -1,9 +1,15 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    // watch: true,
-    // mode: 'development',
     entry: './src/index.ts',
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {from: path.resolve(__dirname, "src/static"), to: path.resolve(__dirname, "public/assets")},
+            ],
+        }),
+    ],
     module: {
         rules: [
             {
@@ -22,8 +28,8 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'public'),
-        compress: true,
-        open: true,
+        // compress: true,
+        // open: true,
         port: 3000,
     },
 };

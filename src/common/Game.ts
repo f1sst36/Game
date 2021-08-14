@@ -1,11 +1,13 @@
-import { PerspectiveCamera, Scene, WebGLRenderer, XRAnimationLoopCallback } from 'three';
-import { EntityStore } from './stores/EntityStore';
-import { Entity } from './Entity';
+import {PerspectiveCamera, Scene, WebGLRenderer, XRAnimationLoopCallback} from 'three';
+import {EntityStore} from './stores/EntityStore';
+import {Entity} from './Entity';
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 export class Game {
     private readonly scene: Scene;
     private readonly camera: PerspectiveCamera;
     private readonly renderer: WebGLRenderer;
+    private readonly controls: OrbitControls;
 
     public entityStore: EntityStore;
 
@@ -13,14 +15,20 @@ export class Game {
         this.entityStore = new EntityStore();
 
         this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
-        this.camera.position.z = 2;
+        this.camera.position.x = 0;
+        this.camera.position.y = 1;
+        this.camera.position.z = 0;
+
+        // this.camera.position.set(0, 1, 0);
 
         this.scene = new Scene();
 
-        this.renderer = new WebGLRenderer({ antialias: true });
+        this.renderer = new WebGLRenderer({antialias: true});
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setAnimationLoop(this.animationLoop);
         document.body.appendChild(this.renderer.domElement);
+
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
 
     private animationLoop: XRAnimationLoopCallback = (time: number) => {
@@ -30,6 +38,7 @@ export class Game {
             entities[i].executeUpdate(time);
         }
 
+        // this.controls.update();
         this.renderer.render(this.scene, this.camera);
     };
 
