@@ -17,6 +17,8 @@ export class Game {
 
         this.scene = new Scene();
 
+        console.log(123, 'qwerty');
+
         this.renderer = new WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setAnimationLoop(this.animationLoop);
