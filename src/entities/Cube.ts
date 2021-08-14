@@ -4,7 +4,7 @@ import { Entity } from '../common/Entity';
 export class Cube extends Entity {
     private name: string;
     protected self: Mesh;
-    private moveSpeed: number;
+    private readonly moveSpeed: number;
 
     constructor() {
         super();

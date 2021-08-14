@@ -3,9 +3,9 @@ import { EntityStore } from './stores/EntityStore';
 import { Entity } from './Entity';
 
 export class Game {
-    private scene: Scene;
-    private camera: PerspectiveCamera;
-    private renderer: WebGLRenderer;
+    private readonly scene: Scene;
+    private readonly camera: PerspectiveCamera;
+    private readonly renderer: WebGLRenderer;
 
     public entityStore: EntityStore;
 
@@ -39,7 +39,7 @@ export class Game {
     };
 
     public getScene = () => this.scene;
-    
+
     public getCamera = () => this.camera;
 
     public stop = () => {

@@ -2,7 +2,7 @@ import { Entity } from '../Entity';
 import { Exception } from '../exceptions/Exception';
 
 export class EntityStore {
-    private entities: Entity[];
+    private readonly entities: Entity[];
 
     constructor() {
         this.entities = [];
