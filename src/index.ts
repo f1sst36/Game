@@ -16,7 +16,7 @@ const ground = new Ground();
 new Cube(ground);
 
 (async () => {
-    const object = await ModelLoader.loadFBX('assets/models/forest/tree_01.fbx');
+    const object = await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_tree_02.fbx');
     const loader = new TGALoader();
     const texture = loader.load('assets/textures/tex_a.tga');
     await Texture.setTexture(object, texture);
