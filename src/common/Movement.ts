@@ -45,6 +45,8 @@ export class Movement {
         const positionZ = position.z;
         const pointZ = point.z;
 
+        if (position.x === point.x && position.z === point.z) return;
+
         const isNearToCorrectXPosition = ((pointX >= 0) && ((positionX > pointX) && ((positionX - this.moveSpeed) <= pointX)))
             || ((positionX < pointX) && ((positionX + this.moveSpeed) >= pointX));
 

@@ -19,7 +19,7 @@ export class Cube extends Entity {
         this.self.position.y = 0;
         window.game.initEntity(this);
 
-        this.movement = new Movement(this, ground, 0.1);
+        this.movement = new Movement(this, ground, 0.045);
 
         console.log('start');
     }
