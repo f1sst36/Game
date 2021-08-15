@@ -8,14 +8,8 @@ window.game = new Game();
 
 Light.initCommonLight();
 
-new Cube();
-// const cube_2 = new Cube();
-// const cube_3 = new Cube();
+const ground = new Ground();
 
-new Ground();
-
-// document.addEventListener('click', () => {
-//     new Cube();
-// });
+new Cube(ground);
 
 StopRenderer.stopWithKeyDown(' ');

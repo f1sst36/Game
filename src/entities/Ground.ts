@@ -24,6 +24,7 @@ export class Ground extends Entity {
         const groundMaterial = new MeshLambertMaterial({map: groundTexture});
 
         this.self = new Mesh(new PlaneGeometry(20, 20), groundMaterial);
+        this.self.name = 'ground';
 
         this.self.rotation.x = (Number((-Math.PI / 2)));
 

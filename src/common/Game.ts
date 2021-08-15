@@ -52,6 +52,7 @@ export class Game {
     public getCamera = () => this.camera;
 
     public stop = () => {
+        console.log('The game is stopped');
         this.renderer.setAnimationLoop(null);
     };
 }
