@@ -1,6 +1,6 @@
 import {DataTexture, Group, Mesh} from "three";
 
-export class Texture {
+export class TextureSetter {
     public static setTexture = (object: Group, texture: DataTexture) => {
         return new Promise((resolve, _) => {
             object.traverse((node) => {

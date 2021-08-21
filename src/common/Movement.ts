@@ -1,6 +1,6 @@
-import {Ground} from "../entities/Ground";
-import {Intersection, Raycaster, Vector2, Vector3} from "three";
-import {Entity} from "./Entity";
+import { Ground } from '../entities/Ground';
+import { Intersection, Raycaster, Vector2, Vector3 } from 'three';
+import { Entity } from './Entity';
 
 export class Movement {
     private groundIntersect: Intersection | null = null;
@@ -20,7 +20,7 @@ export class Movement {
         document.addEventListener('mouseup', (event: any) => {
             this.getIntersectWithGround(event);
         });
-    }
+    };
 
     private getIntersectWithGround = (event: any): void => {
         const raycaster = new Raycaster();
@@ -32,7 +32,7 @@ export class Movement {
         raycaster.setFromCamera(click, window.game.getCamera());
 
         this.groundIntersect = raycaster.intersectObjects([this.ground.getSelf()])[0];
-    }
+    };
 
     public movementUpdate = () => {
         if (!this.groundIntersect) return;
@@ -47,18 +47,20 @@ export class Movement {
 
         if (position.x === point.x && position.z === point.z) return;
 
-        const isNearToCorrectXPosition = ((pointX >= 0) && ((positionX > pointX) && ((positionX - this.moveSpeed) <= pointX)))
-            || ((positionX < pointX) && ((positionX + this.moveSpeed) >= pointX));
+        const isNearToCorrectXPosition =
+            (pointX >= 0 && positionX > pointX && positionX - this.moveSpeed <= pointX) ||
+            (positionX < pointX && positionX + this.moveSpeed >= pointX);
 
-        const isNearToCorrectZPosition = ((pointZ >= 0) && ((positionZ > pointZ) && ((positionZ - this.moveSpeed) <= pointZ)))
-            || ((positionZ < pointZ) && ((positionZ + this.moveSpeed) >= pointZ));
+        const isNearToCorrectZPosition =
+            (pointZ >= 0 && positionZ > pointZ && positionZ - this.moveSpeed <= pointZ) ||
+            (positionZ < pointZ && positionZ + this.moveSpeed >= pointZ);
 
         if (isNearToCorrectXPosition) position.x = point.x;
         if (isNearToCorrectZPosition) position.z = point.z;
 
         if (position.x !== point.x)
-            position.x > point.x ? position.x -= this.moveSpeed : position.x += this.moveSpeed;
+            position.x > point.x ? (position.x -= this.moveSpeed) : (position.x += this.moveSpeed);
         if (position.z !== point.z)
-            position.z > point.z ? position.z -= this.moveSpeed : position.z += this.moveSpeed;
-    }
+            position.z > point.z ? (position.z -= this.moveSpeed) : (position.z += this.moveSpeed);
+    };
 }

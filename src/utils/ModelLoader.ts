@@ -11,6 +11,7 @@ export class ModelLoader {
                     object.traverse((child) => {
                         if (child instanceof Mesh) {
                             child.geometry.computeVertexNormals();
+                            child.castShadow = true;
                         }
                     });
                     resolve(object);

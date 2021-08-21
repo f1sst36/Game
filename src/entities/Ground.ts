@@ -26,30 +26,31 @@ export class Ground extends Entity {
         // groundTexture.anisotropy = 16;
         // groundTexture.encoding = sRGBEncoding;
 
-        // const groundMaterial = new MeshPhongMaterial({ color: '#5f9130' });
-        // const groundGeometry = new PlaneGeometry(2000, 2000);
+        const groundMaterial = new MeshPhongMaterial({ color: '#5f9130', shininess: 20 });
+        const groundGeometry = new PlaneGeometry(2000, 2000);
         // groundGeometry.computeFlatVertexNormals();
 
-        const geometry = new BufferGeometry();
-        // create a simple square shape. We duplicate the top left and bottom right
-        // vertices because each vertex needs to appear once per triangle.
-        const vertices = new Float32Array( [
-            -1.0, -1.0,  1.0,
-            1.0, -1.0,  1.0,
-            1.0,  1.0,  1.0,
+        // const geometry = new BufferGeometry();
+        // // create a simple square shape. We duplicate the top left and bottom right
+        // // vertices because each vertex needs to appear once per triangle.
+        // const vertices = new Float32Array( [
+        //     -1.0, -1.0,  1.0,
+        //     1.0, -1.0,  1.0,
+        //     1.0,  1.0,  1.0,
 
-            1.0,  1.0,  1.0,
-            -1.0,  1.0,  1.0,
-            -1.0, -1.0,  1.0,
-        ] );
+        //     1.0,  1.0,  1.0,
+        //     -1.0,  1.0,  1.0,
+        //     -1.0, -1.0,  1.0,
+        // ] );
 
         // itemSize = 3 because there are 3 values (components) per vertex
-        geometry.setAttribute( 'position', new BufferAttribute( vertices, 3 ) );
-        const material = new MeshBasicMaterial( { color: 0xff0000, side: DoubleSide } );
+        // geometry.setAttribute( 'position', new BufferAttribute( vertices, 3 ) );
+        // const material = new MeshBasicMaterial( { color: 0xff0000, side: DoubleSide } );
         // const mesh = new Mesh( geometry, material );
 
-        this.self = new Mesh(geometry, material);
-       
+        this.self = new Mesh(groundGeometry, groundMaterial);
+        this.self.receiveShadow = true;
+
         this.self.name = 'ground';
 
         this.self.rotation.x = +(-Math.PI / 2);

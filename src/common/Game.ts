@@ -1,7 +1,7 @@
-import {PerspectiveCamera, Scene, WebGLRenderer, XRAnimationLoopCallback} from 'three';
-import {EntityStore} from './stores/EntityStore';
-import {Entity} from './Entity';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import { PerspectiveCamera, Scene, WebGLRenderer, XRAnimationLoopCallback } from 'three';
+import { EntityStore } from './stores/EntityStore';
+import { Entity } from './Entity';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export class Game {
     private readonly scene: Scene;
@@ -14,7 +14,12 @@ export class Game {
     constructor() {
         this.entityStore = new EntityStore();
 
-        this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10000);
+        this.camera = new PerspectiveCamera(
+            70,
+            window.innerWidth / window.innerHeight,
+            0.01,
+            10000
+        );
         this.camera.position.x = -5;
         this.camera.position.y = 4;
         this.camera.position.z = 14;
@@ -24,9 +29,12 @@ export class Game {
 
         this.scene = new Scene();
 
-        this.renderer = new WebGLRenderer({antialias: true});
+        this.renderer = new WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setAnimationLoop(this.animationLoop);
+
+        this.renderer.shadowMap.enabled = true;
+
         document.body.appendChild(this.renderer.domElement);
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
