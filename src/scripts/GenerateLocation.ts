@@ -28,19 +28,19 @@ export class GenerateLocation {
             }
         }
 
-        const object2 = await ModelLoader.loadFBX(
-            'assets/models/buildings/rpgpp_lt_building_01.fbx'
-        );
-        const texture2 = loader.load('assets/textures/tex_a.tga');
-        await TextureSetter.setTexture(object2, texture2);
+        // const object2 = await ModelLoader.loadFBX(
+        //     'assets/models/buildings/rpgpp_lt_building_01.fbx'
+        // );
+        // const texture2 = loader.load('assets/textures/tex_a.tga');
+        // await TextureSetter.setTexture(object2, texture2);
 
         // const object3 = await ModelLoader.loadFBX('assets/models/characters/Maskboy.FBX');
         // // const texture3 = loader.load('assets/textures/tex_a.tga');
         // // await Texture.setTexture(object2, texture2);
 
         // // window.game.getScene().add(object);
-        window.game.getScene().add(object2);
+        // window.game.getScene().add(object2);
         // // object.position.x = -7;
-        object2.position.y = 1;
+        // object2.position.y = 1;
     };
 }
