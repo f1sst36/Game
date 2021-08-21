@@ -6,6 +6,7 @@ import {Ground} from "./entities/Ground";
 import {ModelLoader} from "./utils/ModelLoader";
 import {TGALoader} from "three/examples/jsm/loaders/TGALoader";
 import {Texture} from "./utils/Texture";
+import { Mesh } from 'three';
 
 window.game = new Game();
 
@@ -25,9 +26,14 @@ new Cube(ground);
     const texture2 = loader.load('assets/textures/tex_a.tga');
     await Texture.setTexture(object2, texture2);
 
+    const object3 = await ModelLoader.loadFBX('assets/models/characters/Maskboy.FBX');
+    // const texture3 = loader.load('assets/textures/tex_a.tga');
+    // await Texture.setTexture(object2, texture2);
+
     window.game.getScene().add(object);
     window.game.getScene().add(object2);
     object.position.x = -7;
+    object2.position.x = 10;
 })()
 
 StopRenderer.stopWithKeyDown(' ');

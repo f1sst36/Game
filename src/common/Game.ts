@@ -14,7 +14,7 @@ export class Game {
     constructor() {
         this.entityStore = new EntityStore();
 
-        this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
+        this.camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10000);
         this.camera.position.x = -5;
         this.camera.position.y = 4;
         this.camera.position.z = 14;

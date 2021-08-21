@@ -6,7 +6,11 @@ module.exports = {
     plugins: [
         new CopyPlugin({
             patterns: [
-                {from: path.resolve(__dirname, "src/static"), to: path.resolve(__dirname, "public/assets")},
+                {
+                    from: path.resolve(__dirname, 'src/assets'),
+                    to: path.resolve(__dirname, 'build/assets'),
+                },
+                { from: path.resolve(__dirname, 'public'), to: path.resolve(__dirname, 'build') },
             ],
         }),
     ],
@@ -24,10 +28,10 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'build'),
     },
     devServer: {
-        contentBase: path.join(__dirname, 'public'),
+        contentBase: path.join(__dirname, 'build'),
         // compress: true,
         // open: true,
         port: 3000,
