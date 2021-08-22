@@ -5,15 +5,18 @@ import { TextureSetter } from '../utils/TextureSetter';
 
 export class GenerateLocation {
     private readonly texture: DataTexture;
+    private readonly perimeter: number;
 
     constructor() {
         const loader = new TGALoader();
         this.texture = loader.load('assets/textures/tex_a.tga');
+        this.perimeter = 70;
     }
 
     public init = async (): Promise<void> => {
         this.generateTrees();
-        this.generateGround();
+        // this.generateGround();
+        this.generateHills();
 
         const house = await ModelLoader.loadFBX(
             'assets/models/buildings/rpgpp_lt_building_01.fbx',
@@ -27,10 +30,10 @@ export class GenerateLocation {
         await TextureSetter.setTexture(house, texture2);
 
         // const object3 = await ModelLoader.loadFBX('assets/models/characters/Maskboy.FBX');
-        // // const texture3 = loader.load('assets/textures/tex_a.tga');
-        // // await Texture.setTexture(object2, texture2);
+        // const texture3 = loader.load('assets/textures/tex_a.tga');
+        // await TextureSetter.setTexture(object3, texture3);
 
-        // // window.game.getScene().add(object);
+        // window.game.getScene().add(object3);
         window.game.getScene().add(house);
         // // object.position.x = -7;
         house.position.y = 0.7;
@@ -46,7 +49,7 @@ export class GenerateLocation {
         await TextureSetter.setTexture(tree_01, this.texture);
         await TextureSetter.setTexture(tree_02, this.texture);
 
-        const countOfTrees = 50;
+        const countOfTrees = 100;
         for (let i = 0; i < countOfTrees; i++) {
             const numberOfTree = Math.round(Math.random()) + 1;
             const tree = numberOfTree === 1 ? tree_01.clone() : tree_02.clone();
@@ -58,32 +61,64 @@ export class GenerateLocation {
 
             tree.rotateY(Math.PI * Math.random());
 
-            tree.position.x = Math.round(Math.random() * 100) - 50;
-            if (Math.random() > 0.5) {
-                tree.position.z = Math.round(Math.random() * 25) - 25;
-            } else {
-                tree.position.z = Math.round(Math.random() * 25) + 10;
-            }
+            tree.position.x =
+                Math.round(Math.random() * this.perimeter * 2) - (this.perimeter * 2) / 2;
+            tree.position.z =
+                Math.round(Math.random() * this.perimeter * 2) - (this.perimeter * 2) / 2;
         }
     };
 
     private generateGround = async (): Promise<void> => {
-        const oneAreaSize = 13;
         const grass = await ModelLoader.loadFBX(
-            `assets/models/forest/rpgpp_lt_terrain_grass_02.fbx`,
+            'assets/models/forest/rpgpp_lt_terrain_grass_02.fbx',
             {
                 receiveShadow: true,
             }
         );
         await TextureSetter.setTexture(grass, this.texture);
 
-        for (let i = -10; i <= 10; i++) {
-            for (let j = -10; j <= 10; j++) {
+        const oneAreaSize = 14;
+        const from = -this.perimeter / 2;
+        const to = this.perimeter / 2;
+        for (let x = from; x <= to; x++) {
+            for (let z = from; z <= to; z++) {
                 const newGrass = grass.clone();
-                // newGrass.scale.setY(Math.random() + 0.1);
-                newGrass.position.setX(i * oneAreaSize);
-                newGrass.position.setZ(j * oneAreaSize);
+                newGrass.position.setX(x * oneAreaSize);
+                newGrass.position.setZ(z * oneAreaSize);
                 window.game.getScene().add(newGrass);
+            }
+        }
+    };
+
+    private generateHills = async (): Promise<void> => {
+        const hill_1 = await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_hill_small_01.fbx');
+        // const hill_2 = await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_hill_small_02.fbx');
+        const hill_2 = await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_mountain_01.fbx');
+        await TextureSetter.setTexture(hill_1, this.texture);
+        await TextureSetter.setTexture(hill_2, this.texture);
+
+        const oneHillSize = 13;
+        const from = -this.perimeter / 2;
+        const to = this.perimeter / 2;
+        for (let x = from; x <= to; x++) {
+            for (let z = from; z <= to; z++) {
+                if (
+                    (x === from || x === to || z === from || z === to) &&
+                    x % 5 === 0 &&
+                    z % 5 === 0
+                ) {
+                    const newHill = Math.random() > 0.5 ? hill_1.clone() : hill_2.clone();
+                    newHill.position.setX(x * oneHillSize);
+                    newHill.position.setZ(z * oneHillSize);
+
+                    newHill.scale.setX(0.9 + Math.random() * 0.3);
+                    newHill.scale.setY(1.4 + Math.random());
+                    newHill.scale.setZ(0.9 + Math.random() * 0.3);
+
+                    newHill.rotateY(Math.PI * Math.random());
+
+                    window.game.getScene().add(newHill);
+                }
             }
         }
     };

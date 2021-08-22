@@ -10,7 +10,7 @@ export class Cube extends Entity {
     constructor(ground: Ground) {
         super();
 
-        const geometry = new BoxGeometry(0.2, 0.2, 0.2);
+        const geometry = new BoxGeometry(2, 2, 2);
         const material = new MeshLambertMaterial();
 
         this.self = new Mesh(geometry, material);
@@ -22,7 +22,7 @@ export class Cube extends Entity {
         this.self.position.y = 0.3;
         window.game.initEntity(this);
 
-        this.movement = new Movement(this, ground, 0.045);
+        this.movement = new Movement(this, ground, 0.2);
 
         console.log('start');
     }

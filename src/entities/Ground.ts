@@ -26,7 +26,7 @@ export class Ground extends Entity {
         // groundTexture.anisotropy = 16;
         // groundTexture.encoding = sRGBEncoding;
 
-        const groundMaterial = new MeshPhongMaterial({ color: '#5f9130', shininess: 20 });
+        const groundMaterial = new MeshPhongMaterial({ color: '#5c8049', shininess: 20 });
         const groundGeometry = new PlaneGeometry(2000, 2000);
         // groundGeometry.computeFlatVertexNormals();
 
