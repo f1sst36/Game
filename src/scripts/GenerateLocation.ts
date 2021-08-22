@@ -17,6 +17,7 @@ export class GenerateLocation {
         this.generateTrees();
         // this.generateGround();
         this.generateHills();
+        this.generateProps();
 
         const house = await ModelLoader.loadFBX(
             'assets/models/buildings/rpgpp_lt_building_01.fbx',
@@ -62,9 +63,9 @@ export class GenerateLocation {
             tree.rotateY(Math.PI * Math.random());
 
             tree.position.x =
-                Math.round(Math.random() * this.perimeter * 2) - (this.perimeter * 2) / 2;
+                Math.round(Math.random() * this.perimeter * 4) - (this.perimeter * 4) / 2;
             tree.position.z =
-                Math.round(Math.random() * this.perimeter * 2) - (this.perimeter * 2) / 2;
+                Math.round(Math.random() * this.perimeter * 4) - (this.perimeter * 4) / 2;
         }
     };
 
@@ -77,14 +78,14 @@ export class GenerateLocation {
         );
         await TextureSetter.setTexture(grass, this.texture);
 
-        const oneAreaSize = 14;
+        const spacing = 14;
         const from = -this.perimeter / 2;
         const to = this.perimeter / 2;
         for (let x = from; x <= to; x++) {
             for (let z = from; z <= to; z++) {
                 const newGrass = grass.clone();
-                newGrass.position.setX(x * oneAreaSize);
-                newGrass.position.setZ(z * oneAreaSize);
+                newGrass.position.setX(x * spacing);
+                newGrass.position.setZ(z * spacing);
                 window.game.getScene().add(newGrass);
             }
         }
@@ -97,7 +98,7 @@ export class GenerateLocation {
         await TextureSetter.setTexture(hill_1, this.texture);
         await TextureSetter.setTexture(hill_2, this.texture);
 
-        const oneHillSize = 13;
+        const spacing = 13;
         const from = -this.perimeter / 2;
         const to = this.perimeter / 2;
         for (let x = from; x <= to; x++) {
@@ -108,8 +109,8 @@ export class GenerateLocation {
                     z % 5 === 0
                 ) {
                     const newHill = Math.random() > 0.5 ? hill_1.clone() : hill_2.clone();
-                    newHill.position.setX(x * oneHillSize);
-                    newHill.position.setZ(z * oneHillSize);
+                    newHill.position.setX(x * spacing);
+                    newHill.position.setZ(z * spacing);
 
                     newHill.scale.setX(0.9 + Math.random() * 0.3);
                     newHill.scale.setY(1.4 + Math.random());
@@ -119,6 +120,58 @@ export class GenerateLocation {
 
                     window.game.getScene().add(newHill);
                 }
+            }
+        }
+    };
+
+    private generateProps = async (): Promise<void> => {
+        const props = [
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_flower_01.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_flower_02.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_flower_03.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_bush_01.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_bush_02.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_rock_01.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_rock_02.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_rock_03.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_rock_small_01.fbx', {
+                receiveShadow: true,
+            }),
+            await ModelLoader.loadFBX('assets/models/forest/rpgpp_lt_rock_small_02.fbx', {
+                receiveShadow: true,
+            }),
+        ];
+
+        props.forEach(async (prop) => {
+            await TextureSetter.setTexture(prop, this.texture);
+        })
+
+        const spacing = 14;
+        const from = -this.perimeter / 2;
+        const to = this.perimeter / 2;
+        for (let x = from; x <= to; x++) {
+            for (let z = from; z <= to; z++) {
+                if (!(x % 5 === 0 || z % 5 === 0)) continue;
+                const newProp = props[Math.round(Math.random() * (props.length - 1))].clone();
+                newProp.position.setX(x * spacing * Math.random());
+                newProp.position.setZ(z * spacing * Math.random());
+                window.game.getScene().add(newProp);
             }
         }
     };
