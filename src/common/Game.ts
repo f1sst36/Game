@@ -29,7 +29,7 @@ export class Game {
 
         this.scene = new Scene();
 
-        this.renderer = new WebGLRenderer({ antialias: true });
+        this.renderer = new WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setAnimationLoop(this.animationLoop);
 

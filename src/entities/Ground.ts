@@ -30,7 +30,7 @@ export class Ground extends Entity {
         const groundGeometry = new PlaneGeometry(2000, 2000);
         // groundGeometry.computeFlatVertexNormals();
 
-        // const geometry = new BufferGeometry();
+        // const groundGeometry = new BufferGeometry();
         // // create a simple square shape. We duplicate the top left and bottom right
         // // vertices because each vertex needs to appear once per triangle.
         // const vertices = new Float32Array( [
@@ -43,9 +43,9 @@ export class Ground extends Entity {
         //     -1.0, -1.0,  1.0,
         // ] );
 
-        // itemSize = 3 because there are 3 values (components) per vertex
-        // geometry.setAttribute( 'position', new BufferAttribute( vertices, 3 ) );
-        // const material = new MeshBasicMaterial( { color: 0xff0000, side: DoubleSide } );
+        // // itemSize = 3 because there are 3 values (components) per vertex
+        // groundGeometry.setAttribute( 'position', new BufferAttribute( vertices, 3 ) );
+        // const groundMaterial = new MeshBasicMaterial( { color: '#5f9130', side: DoubleSide } );
         // const mesh = new Mesh( geometry, material );
 
         this.self = new Mesh(groundGeometry, groundMaterial);
