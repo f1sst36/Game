@@ -1,4 +1,4 @@
-import {DataTexture, Group, Mesh} from "three";
+import { DataTexture, Group, Mesh } from 'three';
 
 export class TextureSetter {
     public static setTexture = (object: Group, texture: DataTexture) => {
@@ -7,10 +7,10 @@ export class TextureSetter {
                 if (node instanceof Mesh) {
                     node.material.map = texture;
                     resolve('success');
-                    // TODO node.material.shininess = 0 - наверное не лучшая идея
-                    node.material.shininess = 0
+                    // TODO node.material.shininess = value - наверное не лучшая идея
+                    node.material.shininess = 1;
                 }
             });
-        })
-    }
+        });
+    };
 }
